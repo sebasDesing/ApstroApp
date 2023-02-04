@@ -1,11 +1,12 @@
-package com.example.apstroapp.view
+package com.example.apstroapp.ui.view
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.viewModels
+import androidx.core.view.isVisible
 import androidx.lifecycle.Observer
 import com.example.apstroapp.databinding.ActivityMainBinding
-import com.example.apstroapp.viewmodel.AstroTypeViewModel
+import com.example.apstroapp.ui.viewmodel.AstroTypeViewModel
 
 class MainActivity : AppCompatActivity() {
 
@@ -15,10 +16,13 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
+        astroViewModel.onCreate()
         astroViewModel.astroModel.observe(this, Observer { current_Astro ->
             binding.textLibro.text = current_Astro.quote
             binding.author.text = current_Astro.author
+        })
+        astroViewModel.isLoading.observe(this, Observer {
+            binding.loading.isVisible = it
         })
 
         binding.viewContainer.setOnClickListener{
