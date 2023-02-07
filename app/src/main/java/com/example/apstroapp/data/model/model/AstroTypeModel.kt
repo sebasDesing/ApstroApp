@@ -3,6 +3,6 @@ package com.example.apstroapp.data.model.model
 import com.google.gson.annotations.SerializedName
 
 data class AstroTypeModel(
-    @SerializedName("quote") val quote: String,
-    @SerializedName("author") val author: String
+    @SerializedName("type_astro") val typeAstro: String,
+    @SerializedName("img_type_astrourl") val imageUrl: String
 )

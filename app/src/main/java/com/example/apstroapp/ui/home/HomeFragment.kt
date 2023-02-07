@@ -5,11 +5,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.activity.viewModels
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import com.example.apstroapp.R
 import com.example.apstroapp.databinding.FragmentHomeBinding
 import com.example.apstroapp.ui.viewmodel.AstroTypeViewModel
 
@@ -33,8 +31,8 @@ class HomeFragment : Fragment() {
 
         astroViewModel.onCreate()
         astroViewModel.astroModel.observe(viewLifecycleOwner, Observer { current_Astro ->
-            binding.textLibro.text = current_Astro.quote
-            binding.author.text = current_Astro.author
+            binding.textLibro.text = current_Astro.typeAstro
+            binding.author.text = current_Astro.imageUrl
         })
         astroViewModel.isLoading.observe(viewLifecycleOwner, Observer {
             binding.loading.isVisible = it
