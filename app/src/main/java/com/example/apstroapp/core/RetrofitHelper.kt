@@ -1,5 +1,6 @@
 package com.example.apstroapp.core
 
+import com.example.apstroapp.utils.Constants
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
@@ -7,7 +8,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 object RetrofitHelper {
     fun getRetrofit(): Retrofit {
         return Retrofit.Builder()
-            .baseUrl("http://192.168.0.101:3000/")
+            .baseUrl(Constants.API_BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
     }
