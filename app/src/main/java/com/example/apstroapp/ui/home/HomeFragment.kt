@@ -24,7 +24,7 @@ class HomeFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        
+
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -41,7 +41,7 @@ class HomeFragment : Fragment() {
             binding.loading.isVisible = it
         })
 
-        binding.FragmenHomeContain.setOnClickListener{
+        binding.FragmenHomeContain.setOnClickListener {
             astroViewModel.randomAstro()
         }
     }

@@ -17,16 +17,17 @@ import javax.inject.Singleton
 object NetworkModule {
     @Singleton
     @Provides
-    fun provideRetrofit():Retrofit{
+    fun provideRetrofit(): Retrofit {
         return Retrofit.Builder()
             .baseUrl(Constants.API_BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
     }
+
     @Singleton
     @Provides
 
-    fun provideAstroApiClient(retrofit: Retrofit) : AstroApiClient{
-    return  retrofit.create(AstroApiClient::class.java)
+    fun provideAstroApiClient(retrofit: Retrofit): AstroApiClient {
+        return retrofit.create(AstroApiClient::class.java)
     }
 }

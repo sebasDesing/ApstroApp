@@ -13,29 +13,29 @@ import javax.inject.Inject
 
 @HiltViewModel
 class AstroTypeViewModel @Inject constructor(
-    private val getAstroUseCase : GetAstroTypesUseCase,
-    private val getRandomUseCase : GetAstroRandonUseCase
+    private val getAstroUseCase: GetAstroTypesUseCase,
+    private val getRandomUseCase: GetAstroRandonUseCase
 ) : ViewModel() {
     val astroModel = MutableLiveData<AstroTypeModel>()
     val isLoading = MutableLiveData<Boolean>()
 
-  
 
     fun onCreate() {
         viewModelScope.launch {
             isLoading.postValue(true)
             val result = getAstroUseCase()
-            if(!result.isNullOrEmpty()) {
+            if (!result.isNullOrEmpty()) {
                 astroModel.postValue(result[0])
                 isLoading.postValue(false)
             }
         }
     }
+
     fun randomAstro() {
 
         isLoading.postValue(true)
-        val astro =getRandomUseCase()
-        if (astro!=null){
+        val astro = getRandomUseCase()
+        if (astro != null) {
             astroModel.postValue(astro)
         }
         isLoading.postValue(false)
