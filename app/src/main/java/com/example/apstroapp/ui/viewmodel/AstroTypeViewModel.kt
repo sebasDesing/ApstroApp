@@ -7,13 +7,20 @@ import com.example.apstroapp.data.model.AstroProvider
 import com.example.apstroapp.data.model.model.AstroTypeModel
 import com.example.apstroapp.domain.GetAstroRandonUseCase
 import com.example.apstroapp.domain.GetAstroTypesUseCase
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class AstroTypeViewModel : ViewModel() {
+@HiltViewModel
+class AstroTypeViewModel @Inject constructor(
+    private val getAstroUseCase : GetAstroTypesUseCase,
+    private val getRandomUseCase : GetAstroRandonUseCase
+) : ViewModel() {
     val astroModel = MutableLiveData<AstroTypeModel>()
     val isLoading = MutableLiveData<Boolean>()
-    var getAstroUseCase = GetAstroTypesUseCase()
-    var getRandomUseCase = GetAstroRandonUseCase()
+
+  
+
     fun onCreate() {
         viewModelScope.launch {
             isLoading.postValue(true)
