@@ -35,7 +35,7 @@ class HomeFragment : Fragment() {
         astroViewModel.onCreate()
         astroViewModel.astroModel.observe(viewLifecycleOwner, Observer { current_Astro ->
             binding.textLibro.text = current_Astro.typeAstro
-            Glide.with(this).load(current_Astro.imageUrl).into(binding.imgTypeAstro)
+            Glide.with(this).load(current_Astro.imgUrl).into(binding.imgTypeAstro)
         })
         astroViewModel.isLoading.observe(viewLifecycleOwner, Observer {
             binding.loading.isVisible = it

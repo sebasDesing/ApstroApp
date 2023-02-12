@@ -1,13 +1,14 @@
 package com.example.apstroapp.domain
 
-import com.example.apstroapp.data.model.AstroProvider
+import com.example.apstroapp.data.model.AstroRepository
 import com.example.apstroapp.data.model.model.AstroTypeModel
+import com.example.apstroapp.domain.model.AstroType
 import javax.inject.Inject
 
-class GetAstroRandonUseCase @Inject constructor(private val astroProvider: AstroProvider) {
+class GetAstroRandonUseCase @Inject constructor(private val repository: AstroRepository) {
 
-    operator fun invoke(): AstroTypeModel? {
-        val astros = astroProvider.astros
+    suspend operator fun invoke(): AstroType? {
+        val astros = repository.getAstroTypesFromDB()
         if (!astros.isNullOrEmpty()) {
             val randomNumber = (astros.indices).random()
             return astros[randomNumber]
