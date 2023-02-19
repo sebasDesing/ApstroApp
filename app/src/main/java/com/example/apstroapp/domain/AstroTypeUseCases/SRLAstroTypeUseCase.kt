@@ -23,7 +23,7 @@ class SRLAstroTypeUseCase @Inject constructor(private val repository: AstroRepos
             listOf(
                 AstroType(
 
-                    "Error",
+                    "Error : 500 ",
                     "https://www.elegantthemes.com/blog/wp-content/uploads/2020/06/000-501-http-error.png"
                 )
             )
