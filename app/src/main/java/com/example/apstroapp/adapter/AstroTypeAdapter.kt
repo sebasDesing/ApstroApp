@@ -14,7 +14,6 @@ class AstroTypeAdapter : RecyclerView.Adapter<AstroTypeViewHolder>() {
         astroTypes.addAll(astroTypeList)
     }
 
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AstroTypeViewHolder {
         val context = parent.context
         val infater = LayoutInflater.from(context)

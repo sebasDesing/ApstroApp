@@ -6,8 +6,6 @@ import com.example.apstroapp.domain.model.AstroType
 import javax.inject.Inject
 
 class GetAstroTypesUseCase @Inject constructor(private val repository: AstroRepository) {
-
-
     suspend operator fun invoke(): List<AstroType> {
         val astroTypes = repository.getAstroTypesFromDB()
         return if (astroTypes.isNotEmpty()) {
@@ -25,6 +23,4 @@ class GetAstroTypesUseCase @Inject constructor(private val repository: AstroRepo
             }
         }
     }
-
-
 }

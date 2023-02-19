@@ -24,7 +24,6 @@ class AstroTypeViewModel @Inject constructor(
 
 ) : ViewModel() {
     val isLoading = MutableLiveData<Boolean>()
-
     fun onCreate(adapter: AstroTypeAdapter, view: View, context: Context) {
         val layoutManager = LinearLayoutManager(context)
         val itemDecorator = DividerItemDecoration(context, DividerItemDecoration.VERTICAL)

@@ -13,5 +13,4 @@ class AstroTypeViewHolder(private val itemView: View) : RecyclerView.ViewHolder(
         textName.text = item.typeAstro
         textUrl.text = item.imageUrl
     }
-
 }
