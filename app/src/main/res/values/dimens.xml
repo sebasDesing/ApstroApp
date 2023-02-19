@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--home_fragment-->
+    <dimen name="match_parent">match_parent</dimen>
+    <dimen name="layout_margin_vertical">16dp</dimen>
+    <diem name="dep">0dp</diem>
+    <!-- Item_astro_type -->
+    <dimen name="card_view_width">match_parent</dimen>
+    <dimen name="card_view_height">120dp</dimen>
+    <dimen name="card_view_margin">16dp</dimen>
+    <dimen name="card_view_corner_radius">18dp</dimen>
+
+</resources>

@@ -24,7 +24,7 @@ class SRLAstroTypeUseCase @Inject constructor(private val repository: AstroRepos
                 AstroType(
 
                     "Error",
-                    "Ocurrió un error al obtener los datos de la API: ${e.message}"
+                    "https://www.elegantthemes.com/blog/wp-content/uploads/2020/06/000-501-http-error.png"
                 )
             )
         }
