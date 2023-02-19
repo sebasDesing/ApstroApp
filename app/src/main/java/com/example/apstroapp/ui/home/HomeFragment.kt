@@ -32,8 +32,16 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        astroViewModel.onCreate(AstroTypeAdapter(), view, requireContext())
+        setList(view)
+        progressBar()
 
+    }
+
+    private fun setList(view: View) {
+        astroViewModel.onCreate(AstroTypeAdapter(), view, requireContext())
+    }
+
+    private fun progressBar() {
         astroViewModel.isLoading.observe(viewLifecycleOwner, Observer {
             binding.loading.isVisible = it
         })
