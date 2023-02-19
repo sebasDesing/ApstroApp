@@ -5,12 +5,12 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.apstroapp.R
 import com.example.apstroapp.data.model.model.AstroTypeModel
+import com.example.apstroapp.databinding.ItemAstroTypeBinding
 
 class AstroTypeViewHolder(private val itemView: View) : RecyclerView.ViewHolder(itemView) {
+    private val bindign = ItemAstroTypeBinding.bind(itemView)
     fun bind(item: AstroTypeModel) {
-        val textName: TextView = itemView.findViewById(R.id.textViewNameAstro)
-        val textUrl: TextView = itemView.findViewById(R.id.textViewUrl)
-        textName.text = item.typeAstro
-        textUrl.text = item.imageUrl
+        bindign.textViewNameAstro.text = item.typeAstro
+        bindign.textViewUrl.text= item.imageUrl
     }
 }
