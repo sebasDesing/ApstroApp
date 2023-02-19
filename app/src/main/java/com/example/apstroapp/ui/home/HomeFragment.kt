@@ -19,6 +19,7 @@ import com.example.apstroapp.R
 import com.example.apstroapp.adapter.AstroTypeAdapter
 import com.example.apstroapp.databinding.FragmentHomeBinding
 import com.example.apstroapp.ui.viewmodel.AstroTypeViewModel
+import com.example.apstroapp.utils.Constants.TIMEOUT
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -58,7 +59,7 @@ class HomeFragment : Fragment() {
                 AstroTypeAdapter()
             )
             Handler(Looper.getMainLooper()).postDelayed(
-                { binding.swipeHome.isRefreshing = false }, 5000
+                { binding.swipeHome.isRefreshing = false }, TIMEOUT
             )
 
         }
