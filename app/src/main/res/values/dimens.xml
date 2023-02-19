@@ -3,7 +3,7 @@
     <!--home_fragment-->
     <dimen name="match_parent">match_parent</dimen>
     <dimen name="layout_margin_vertical">16dp</dimen>
-    <diem name="dep">0dp</diem>
+    <dimen name="layout_dimen_rcy">0dp</dimen>
     <!-- Item_astro_type -->
     <dimen name="card_view_width">match_parent</dimen>
     <dimen name="card_view_height">120dp</dimen>
