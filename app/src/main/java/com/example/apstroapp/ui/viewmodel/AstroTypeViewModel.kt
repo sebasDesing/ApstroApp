@@ -1,7 +1,9 @@
 package com.example.apstroapp.ui.viewmodel
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.view.View
+import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -11,64 +13,53 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.apstroapp.R
 import com.example.apstroapp.adapter.AstroTypeAdapter
 import com.example.apstroapp.data.model.model.AstroTypeModel
-import com.example.apstroapp.domain.GetAstroRandonUseCase
 import com.example.apstroapp.domain.GetAstroTypesUseCase
-import com.example.apstroapp.domain.model.AstroType
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class AstroTypeViewModel @Inject constructor(
-    private val getAstroUseCase: GetAstroTypesUseCase,
-    private val getRandomUseCase: GetAstroRandonUseCase
-) : ViewModel() {
-    val astroModel = MutableLiveData<AstroType>()
-    val isLoading = MutableLiveData<Boolean>()
-    private lateinit var recyclerView: RecyclerView
+    private val getAstroUseCase: GetAstroTypesUseCase
 
+) : ViewModel() {
+    val isLoading = MutableLiveData<Boolean>()
 
     fun onCreate(adapter: AstroTypeAdapter, view: View, context: Context) {
+        val layoutManager = LinearLayoutManager(context)
+        val itemDecorator = DividerItemDecoration(context, DividerItemDecoration.VERTICAL)
+        val recyclerView: RecyclerView = view.findViewById(R.id.recyclerView)
+        recyclerView.layoutManager = layoutManager
+        recyclerView.adapter = adapter
+        recyclerView.addItemDecoration(itemDecorator)
+
         viewModelScope.launch {
             isLoading.postValue(true)
-            val result = getAstroUseCase()
-            if (!result.isNullOrEmpty()) {
-                adapter.setList(result.map {
-
-                    recyclerView = view.findViewById(R.id.recyclerView)
-                    recyclerView.layoutManager = LinearLayoutManager(context)
-                    AstroTypeModel(
-                        typeAstro = it.typeAstro,
-                        imageUrl = it.imgUrl
-                    )
-
-                })
-
-                recyclerView.adapter = adapter
-                recyclerView.addItemDecoration(
-                    DividerItemDecoration(
-                        context,
-                        DividerItemDecoration.VERTICAL
-                    )
-                )
+            try {
+                val result = getAstroUseCase()
+                if (!result.isNullOrEmpty()) {
+                    adapter.setList(result.map {
+                        AstroTypeModel(
+                            typeAstro = it.typeAstro,
+                            imageUrl = it.imgUrl
+                        )
+                    })
+                    isLoading.postValue(false)
+                } else {
+                    // Mostrar mensaje de error
+                    Toast.makeText(context, "No se pudo cargar los datos", Toast.LENGTH_SHORT)
+                        .show()
+                    isLoading.postValue(false)
+                }
+            } catch (e: Exception) {
+                // Mostrar mensaje de error
+                Toast.makeText(
+                    context,
+                    "Error al cargar los datos: ${e.message}",
+                    Toast.LENGTH_SHORT
+                ).show()
                 isLoading.postValue(false)
             }
         }
     }
-
-
-    fun randomAstro() {
-        viewModelScope.launch {
-            isLoading.postValue(true)
-            val astro = getRandomUseCase()
-            if (astro != null) {
-                //astroModel.postValue(astro)
-
-            }
-            isLoading.postValue(false)
-        }
-
-    }
-
-
 }

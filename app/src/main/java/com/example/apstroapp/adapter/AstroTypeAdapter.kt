@@ -12,7 +12,6 @@ class AstroTypeAdapter : RecyclerView.Adapter<AstroTypeViewHolder>() {
     fun setList(astroTypeList: List<AstroTypeModel>) {
         astroTypes.clear()
         astroTypes.addAll(astroTypeList)
-
     }
 
 

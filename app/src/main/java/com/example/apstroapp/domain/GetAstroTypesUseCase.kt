@@ -9,15 +9,20 @@ class GetAstroTypesUseCase @Inject constructor(private val repository: AstroRepo
 
 
     suspend operator fun invoke(): List<AstroType> {
-        val astroTypes = repository.getAastrosTypesFromApi()
+        val astroTypes = repository.getAstroTypesFromDB()
         return if (astroTypes.isNotEmpty()) {
-            repository.insertAstroTypes(astroTypes.map {
-                repository.clearAstroTypes()
-                it.toDB()
-            })
             astroTypes
         } else {
-            repository.getAstroTypesFromDB()
+            val apiAstroTypes = repository.getAastrosTypesFromApi()
+            if (apiAstroTypes.isNotEmpty()) {
+                repository.clearAstroTypes()
+                repository.insertAstroTypes(apiAstroTypes.map {
+                    it.toDB()
+                })
+                apiAstroTypes
+            } else {
+                emptyList()
+            }
         }
     }
 
