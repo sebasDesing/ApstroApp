@@ -1,4 +1,4 @@
-package com.example.apstroapp.domain
+package com.example.apstroapp.domain.AstroTypeUseCases
 
 import com.example.apstroapp.data.model.AstroRepository
 import com.example.apstroapp.data.model.database.entities.toDB
@@ -23,4 +23,6 @@ class GetAstroTypesUseCase @Inject constructor(private val repository: AstroRepo
             }
         }
     }
+
+
 }

@@ -13,22 +13,35 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.apstroapp.R
 import com.example.apstroapp.adapter.AstroTypeAdapter
 import com.example.apstroapp.data.model.model.AstroTypeModel
-import com.example.apstroapp.domain.GetAstroTypesUseCase
+import com.example.apstroapp.domain.AstroTypeUseCases.GetAstroTypesUseCase
+import com.example.apstroapp.domain.AstroTypeUseCases.SRLAstroTypeUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class AstroTypeViewModel @Inject constructor(
-    private val getAstroUseCase: GetAstroTypesUseCase
+    private val getAstroTypeUseCase: GetAstroTypesUseCase,
+    private val srlAstroTypeUseCase: SRLAstroTypeUseCase
 
 ) : ViewModel() {
     val isLoading = MutableLiveData<Boolean>()
-    @SuppressLint("NotifyDataSetChanged")
     fun onCreate(adapter: AstroTypeAdapter, view: View, context: Context) {
         val layoutManager = LinearLayoutManager(context)
         val itemDecorator = DividerItemDecoration(context, DividerItemDecoration.VERTICAL)
         val recyclerView: RecyclerView = view.findViewById(R.id.recyclerView)
+
+        setRecyclerView(layoutManager, itemDecorator, recyclerView, adapter, context)
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    private fun setRecyclerView(
+        layoutManager: LinearLayoutManager,
+        itemDecorator: DividerItemDecoration,
+        recyclerView: RecyclerView,
+        adapter: AstroTypeAdapter,
+        context: Context
+    ) {
         recyclerView.layoutManager = layoutManager
         recyclerView.adapter = adapter
         recyclerView.addItemDecoration(itemDecorator)
@@ -36,7 +49,8 @@ class AstroTypeViewModel @Inject constructor(
         viewModelScope.launch {
             isLoading.postValue(true)
             try {
-                val result = getAstroUseCase()
+                val result = getAstroTypeUseCase()
+
                 if (result.isNotEmpty()) {
                     adapter.setList(result.map {
                         AstroTypeModel(
@@ -54,10 +68,37 @@ class AstroTypeViewModel @Inject constructor(
                 }
             } catch (e: Exception) {
                 // Mostrar mensaje de error
-                Toast.makeText(context, "Error al cargar los datos: ${e.message}", Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    context,
+                    "Error al cargar los datos: ${e.message}",
+                    Toast.LENGTH_SHORT
+                ).show()
                 isLoading.postValue(false)
             }
         }
+    }
 
+
+    fun onReload(
+        layoutManager: LinearLayoutManager,
+        itemDecorator: DividerItemDecoration,
+        recyclerView: RecyclerView,
+        adapter: AstroTypeAdapter,
+    ) {
+        recyclerView.layoutManager = layoutManager
+        recyclerView.adapter = adapter
+        recyclerView.addItemDecoration(itemDecorator)
+        viewModelScope.launch {
+            val result = srlAstroTypeUseCase()
+            if (result.isNotEmpty()) {
+                adapter.setList(result.map {
+                    AstroTypeModel(
+                        typeAstro = it.typeAstro,
+                        imageUrl = it.imgUrl
+                    )
+                })
+                adapter.notifyDataSetChanged()
+            }
+        }
     }
 }
