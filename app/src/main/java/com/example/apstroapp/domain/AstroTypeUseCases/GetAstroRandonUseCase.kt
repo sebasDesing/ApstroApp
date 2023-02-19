@@ -1,7 +1,6 @@
-package com.example.apstroapp.domain
+package com.example.apstroapp.domain.AstroTypeUseCases
 
 import com.example.apstroapp.data.model.AstroRepository
-import com.example.apstroapp.data.model.model.AstroTypeModel
 import com.example.apstroapp.domain.model.AstroType
 import javax.inject.Inject
 
