@@ -9,6 +9,7 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import com.bumptech.glide.Glide
+import com.example.apstroapp.adapter.AstroTypeAdapter
 import com.example.apstroapp.databinding.FragmentHomeBinding
 import com.example.apstroapp.ui.viewmodel.AstroTypeViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -31,7 +32,10 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        astroViewModel.onCreate(AstroTypeAdapter())
+    }
+}
+/*
         astroViewModel.onCreate()
         astroViewModel.astroModel.observe(viewLifecycleOwner, Observer { current_Astro ->
             binding.textLibro.text = current_Astro.typeAstro
@@ -46,4 +50,4 @@ class HomeFragment : Fragment() {
         }
     }
 
-}
+    }*/

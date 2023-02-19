@@ -10,4 +10,5 @@
         android:name="com.example.apstroapp.ui.home.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" />
+
 </navigation>

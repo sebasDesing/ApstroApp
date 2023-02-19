@@ -21,4 +21,5 @@ class GetAstroTypesUseCase @Inject constructor(private val repository: AstroRepo
         }
     }
 
+
 }
