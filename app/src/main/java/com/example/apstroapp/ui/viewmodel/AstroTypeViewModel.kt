@@ -24,6 +24,7 @@ class AstroTypeViewModel @Inject constructor(
 
 ) : ViewModel() {
     val isLoading = MutableLiveData<Boolean>()
+    @SuppressLint("NotifyDataSetChanged")
     fun onCreate(adapter: AstroTypeAdapter, view: View, context: Context) {
         val layoutManager = LinearLayoutManager(context)
         val itemDecorator = DividerItemDecoration(context, DividerItemDecoration.VERTICAL)
@@ -36,29 +37,27 @@ class AstroTypeViewModel @Inject constructor(
             isLoading.postValue(true)
             try {
                 val result = getAstroUseCase()
-                if (!result.isNullOrEmpty()) {
+                if (result.isNotEmpty()) {
                     adapter.setList(result.map {
                         AstroTypeModel(
                             typeAstro = it.typeAstro,
                             imageUrl = it.imgUrl
                         )
                     })
+                    adapter.notifyDataSetChanged()
+
                     isLoading.postValue(false)
                 } else {
                     // Mostrar mensaje de error
-                    Toast.makeText(context, "No se pudo cargar los datos", Toast.LENGTH_SHORT)
-                        .show()
+                    Toast.makeText(context, "No se encontraron datos", Toast.LENGTH_SHORT).show()
                     isLoading.postValue(false)
                 }
             } catch (e: Exception) {
                 // Mostrar mensaje de error
-                Toast.makeText(
-                    context,
-                    "Error al cargar los datos: ${e.message}",
-                    Toast.LENGTH_SHORT
-                ).show()
+                Toast.makeText(context, "Error al cargar los datos: ${e.message}", Toast.LENGTH_SHORT).show()
                 isLoading.postValue(false)
             }
         }
+
     }
 }
