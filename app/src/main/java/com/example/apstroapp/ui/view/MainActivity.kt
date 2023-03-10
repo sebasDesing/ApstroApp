@@ -1,12 +1,8 @@
 package com.example.apstroapp.ui.view
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.activity.viewModels
-import androidx.core.view.isVisible
-import androidx.lifecycle.Observer
+import androidx.appcompat.app.AppCompatActivity
 import com.example.apstroapp.databinding.ActivityMainBinding
-import com.example.apstroapp.ui.viewmodel.AstroTypeViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
